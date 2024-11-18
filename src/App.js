@@ -1,33 +1,43 @@
+import { useCallback } from "react";
 import "./App.css";
 // import { connect } from "react-redux";
 import { increaseCounter, decreaseCounter } from "./action/actions";
-
 import { useSelector, useDispatch } from "react-redux";
+import Home from "./components/Home";
 
 function App(props) {
   const dispatch = useDispatch();
   const count = useSelector((state) => state?.counter?.count);
   const name = useSelector((state) => state?.counter?.name);
   // event handler
-  const handleIncrease = () => {
-    // dispatch action
-    // props.increaseCounter();
+  const handleCount = useCallback(
+    (state) => {
+      // dispatch action
+      // props.increaseCounter();
 
-    dispatch(increaseCounter());
-  };
+      if (state === "increase") return dispatch(increaseCounter());
+      else if (state === "decrease") return dispatch(decreaseCounter());
+    },
+    [dispatch]
+  );
 
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <h1>Hello {name}</h1>
         <div>Count: {count}</div>
 
-        <button onClick={handleIncrease}>Increase Count</button>
+        <button onClick={() => handleCount("increase")}>Increase Count</button>
 
-        <button onClick={() => dispatch(decreaseCounter())}>
-          Decrease Count
-        </button>
-      </header>
+        <button onClick={() => handleCount("decrease")}>Decrease Count</button>
+      </header> */}
+      <Home></Home>
+      {/* <h1>Hello {name}</h1>
+      <div>Count: {count}</div>
+
+      <button onClick={() => handleCount("increase")}>Increase Count</button>
+
+      <button onClick={() => handleCount("decrease")}>Decrease Count</button> */}
     </div>
   );
 }
