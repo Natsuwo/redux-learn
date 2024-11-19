@@ -6,7 +6,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { useSelector } from "react-redux";
 
 export default function Header() {
-  const listUsers = useSelector((state) => state.user.listUsers);
+  const listUsers = [];
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>

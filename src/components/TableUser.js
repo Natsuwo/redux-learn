@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUserRedux, fetchAllUser } from "../action/actions";
+import { fetchAllUsers } from "../redux/slices/userSlide";
 
 export default function TableUser() {
   const listUsers = useSelector((state) => state?.user?.listUsers);
@@ -13,12 +12,12 @@ export default function TableUser() {
   const dispatch = useDispatch();
 
   const handleDelete = (user) => {
-    dispatch(deleteUserRedux(user.id));
+    // dispatch(deleteUserRedux(user.id));
   };
 
   useEffect(() => {
     // fetchAllUser();
-    dispatch(fetchAllUser());
+    dispatch(fetchAllUsers());
   }, []);
 
   if (isLoading === true && isError === false) {
@@ -71,7 +70,6 @@ export default function TableUser() {
   if (isLoading === false && isError === true) {
     return (
       <>
-        {" "}
         <Table striped bordered hover>
           <thead>
             <tr>

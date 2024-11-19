@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { createNewUserRedux } from "../action/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function FormAddNew() {
@@ -9,14 +8,14 @@ export default function FormAddNew() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const dispatch = useDispatch();
-  const isCreating = useSelector((state) => state.user.isCreating);
+  const isCreating = false;
 
-  const handleCreateNewUser = () => {
-    dispatch(createNewUserRedux(email, password, username));
-    setEmail("");
-    setUsername("");
-    setPassword("");
-  };
+  // const handleCreateNewUser = () => {
+  //   dispatch(createNewUserRedux(email, password, username));
+  //   setEmail("");
+  //   setUsername("");
+  //   setPassword("");
+  // };
   return (
     <Form onSubmit={(e) => e.preventDefault()}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -49,7 +48,7 @@ export default function FormAddNew() {
         />
       </Form.Group>
       <Button
-        onClick={() => handleCreateNewUser()}
+        // onClick={() => handleCreateNewUser()}
         variant="primary"
         type="submit"
         disabled={isCreating}
