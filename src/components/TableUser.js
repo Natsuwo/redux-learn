@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUser } from "../action/actions";
+import { deleteUserRedux, fetchAllUser } from "../action/actions";
 
 export default function TableUser() {
   const listUsers = useSelector((state) => state?.user?.listUsers);
@@ -12,8 +12,8 @@ export default function TableUser() {
 
   const dispatch = useDispatch();
 
-  const handleDelete = (item) => {
-    console.log(item);
+  const handleDelete = (user) => {
+    dispatch(deleteUserRedux(user.id));
   };
 
   useEffect(() => {
@@ -23,19 +23,19 @@ export default function TableUser() {
 
   if (isLoading === true && isError === false) {
     return (
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <div>Loading data...</div>
-        </tbody>
-      </Table>
+      <>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+        </Table>
+        <div>Loading data...</div>
+      </>
     );
   }
 
@@ -70,19 +70,20 @@ export default function TableUser() {
 
   if (isLoading === false && isError === true) {
     return (
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <div>Something wrong, please try again!!</div>
-        </tbody>
-      </Table>
+      <>
+        {" "}
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+        </Table>
+        <div>Something wrong, please try again!!</div>
+      </>
     );
   }
 
